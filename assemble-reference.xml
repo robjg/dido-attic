@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+ <job>
+ 	<ant id="build-reference" messageLevel="VERBOSE">
+ 		<tasks>
+ 			<xml>
+ 				<tasks>
+ 				
+		<path id="classpath">
+            <fileset dir="${global.projDir}/arooa/lib">
+                <include name="*.jar"/>
+            </fileset>
+			<fileset file="${global.projDir}/oddjob/run-oddjob.jar"/>
+			<fileset dir="${global.projDir}/oddjob/lib">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${global.projDir}/oddjob/opt/lib">
+				<include name="*.jar"/>
+			</fileset>
+            <fileset dir="${allants.dist.bin.dir}/opt/lib">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${allants.dist.bin.dir}/oddballs/oj-poi/lib">
+                <include name="*.jar"/>
+            </fileset>
+		</path>
+		
+		<path id="sourcepath">
+			<pathelement location="${global.projDir}/didio/build/src"/>
+            <pathelement location="${global.projDir}/oj-poi/build/src/"/>
+		</path>
+		
+		<path id="docletpath">
+			<pathelement location="${global.projDir}/oddjob/build/tools"/>
+			<path refid="classpath"/>
+            <pathelement location="${global.projDir}/oddjob/build/test"/>
+			<pathelement location="${global.projDir}/oj-ant/build/test/"/>
+			<pathelement location="${global.projDir}/oj-hsql/build/test/"/>
+			<pathelement location="${global.projDir}/oj-mail/build/test/"/>
+			<pathelement location="${global.projDir}/oj-net/build/test/"/>
+			<pathelement location="${global.projDir}/oj-struts/build/test/"/>
+            <pathelement location="${global.projDir}/oj-spring/build/test/"/>
+			<pathelement location="${global.projDir}/oj-poi/build/test/"/>
+		</path>
+		
+		<mkdir dir="${allants.dist.bin.dir}/docs/reference" />
+
+		<javadoc packagenames="org.oddjob.*"
+             sourcepathref="sourcepath"
+			 destdir="${allants.dist.bin.dir}/docs/reference"
+			 docletpathref="docletpath"
+			 classpathref="classpath"
+			 doclet="org.oddjob.doclet.ManualDoclet"
+			 access="private">
+		</javadoc>
+		
+ 				</tasks>
+ 			</xml>
+ 		</tasks>
+ 	</ant>
+ </job>
+</oddjob>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential name="${thisant.target} Ants">
+            <jobs>
+                <variables id="vars">
+                    <antClassLoader>
+                            <url-class-loader>
+                                <files>
+                                    <files>
+                                        <list>
+                                            <file file="${global.projDir}/dido-assembly/lib/ant-junit.jar"/>
+                                            <file file="${global.projDir}/arooa/test/lib/junit.jar"/>
+                                        </list>
+                                    </files>
+                                </files>
+                                <parent>
+                                    <value value="${dido-ant.class.classLoader}"/>
+                                </parent>
+                            </url-class-loader>
+                    </antClassLoader>
+                </variables>
+                <ant id="dido-ant" name="Dido Ant">
+                    <tasks>
+                        <xml>
+                            <tasks>
+                                <ant antfile="${global.projDir}/dido/build.xml" inheritAll="false" target="${thisant.target}">
+                                    <property name="dist.src.dir" value="${allants.dist.src.dir}"/>
+                                    <property name="dist.bin.dir" value="${allants.dist.bin.dir}"/>
+                                    <property name="build.version" value="${allants.build.version}"/>
+                                </ant>
+                            </tasks>
+                        </xml>
+                    </tasks>
+                    <classLoader>
+                        <value value="${vars.antClassLoader}"/>
+                    </classLoader>
+                </ant>
+                <ant id="oj-poi-ant" name="OJ Poi Ant">
+                    <tasks>
+                        <xml>
+                            <tasks>
+                                <ant antfile="${global.projDir}/oj-poi/build.xml" inheritAll="false" target="${thisant.target}">
+                                    <property name="dist.src.dir" value="${allants.dist.src.dir}"/>
+                                    <property name="dist.bin.dir" value="${allants.dist.bin.dir}"/>
+                                    <property name="build.version" value="${allants.build.version}"/>
+                                </ant>
+                            </tasks>
+                        </xml>
+                    </tasks>
+                    <classLoader>
+                        <value value="${vars.antClassLoader}"/>
+                    </classLoader>
+                </ant>
+                <ant id="dido-assembly-ant" name="Dido Assembly Ant">
+                    <tasks>
+                        <xml>
+                            <tasks>
+                                <ant antfile="${global.projDir}/dido-assembly/build.xml" inheritAll="false" target="${thisant.target}">
+                                    <property name="dist.src.dir" value="${allants.dist.src.dir}"/>
+                                    <property name="dist.bin.dir" value="${allants.dist.bin.dir}"/>
+                                    <property name="build.version" value="${allants.build.version}"/>
+                                </ant>
+                            </tasks>
+                        </xml>
+                    </tasks>
+                    <classLoader>
+                        <value value="${vars.antClassLoader}"/>
+                    </classLoader>
+                </ant>
+                <class class="org.oddjob.util.ClassLoaderDiagnostics" 
+                className="com.sun.tools.javac.Main">
+                    <classLoader>
+                        <value value="${dido-ant.classLoader}"/>
+                    </classLoader>
+                </class>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>
