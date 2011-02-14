@@ -3,21 +3,27 @@
     <job>
         <sequential name="${thisant.target} Ants">
             <jobs>
+                <class class="org.oddjob.util.ClassLoaderDiagnostics" className="com.sun.tools.javac.Main" id="find-tools" name="Find tools.jar in Class Path">
+                    <classLoader>
+                        <value value="${dido-ant.classLoader}"/>
+                    </classLoader>
+                </class>
+                <check name="Check tools.jar is on Class Path" value="${find-tools.location}"/>
                 <variables id="vars">
                     <antClassLoader>
-                            <url-class-loader>
+                        <url-class-loader>
+                            <files>
                                 <files>
-                                    <files>
-                                        <list>
-                                            <file file="${global.projDir}/dido-assembly/lib/ant-junit.jar"/>
-                                            <file file="${global.projDir}/arooa/test/lib/junit.jar"/>
-                                        </list>
-                                    </files>
+                                    <list>
+                                        <file file="${global.projDir}/dido-assembly/lib/ant-junit.jar"/>
+                                        <file file="${global.projDir}/arooa/test/lib/junit.jar"/>
+                                    </list>
                                 </files>
-                                <parent>
-                                    <value value="${dido-ant.class.classLoader}"/>
-                                </parent>
-                            </url-class-loader>
+                            </files>
+                            <parent>
+                                <value value="${dido-ant.class.classLoader}"/>
+                            </parent>
+                        </url-class-loader>
                     </antClassLoader>
                 </variables>
                 <ant id="dido-ant" name="Dido Ant">
@@ -68,12 +74,6 @@
                         <value value="${vars.antClassLoader}"/>
                     </classLoader>
                 </ant>
-                <class class="org.oddjob.util.ClassLoaderDiagnostics" 
-                className="com.sun.tools.javac.Main">
-                    <classLoader>
-                        <value value="${dido-ant.classLoader}"/>
-                    </classLoader>
-                </class>
             </jobs>
         </sequential>
     </job>
