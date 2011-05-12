@@ -1,0 +1,12 @@
+<index>
+	<group group-title="For All"/>
+    <page page-title="Dido - Data In Data Out" index-title="Introduction" index-href="index.html"/>
+    <page page-title="Dido - Licence" index-title="Licence" index-href="../../DIDO-LICENSE.txt"/>
+	<group group-title="For Users"/>
+	<page page-title="Dido - Oddjob Reference" index-title="Reference" index-href="reference/index.html"/>
+    <page page-title="Dido - Data Reference" index-title="Data Ref" index-href="dido-reference/index.html"/>
+	<group group-title="For Developers"/>
+    <page page-title="Dido - Release Notes" index-title="Release Notes" index-href="../../DIDO-RELEASE-NOTES.txt"/>
+    <page page-title="Dido - Developer Guide" index-title="Dev Guide" index-href="develop.html"/>
+	<page page-title="Dido - API docs" index-title="API docs" index-href="api/index.html"/>
+</index>
