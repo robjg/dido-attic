@@ -30,11 +30,11 @@
             <pathelement location="${global.projDir}/oj-poi/build/src/"/>
 		</path>
 		
-		<mkdir dir="${allants.dist.bin.dir}/docs/api" />
+		<mkdir dir="${allants.dist.bin.dir}/docs/dido/api" />
 
 		<javadoc packagenames="org.oddjob.*"
              sourcepathref="sourcepath"
-			 destdir="${allants.dist.bin.dir}/docs/api"
+			 destdir="${allants.dist.bin.dir}/docs/dido/api"
              author="true"
              version="true"
              use="false"

@@ -25,6 +25,15 @@
 		<echo message="oddjob.src is ${oddjob.src}"/>
 		<echo message="--------------------------------------------------------------"/>
 
+		<property name="src.dir"      value="./src"/>			
+		<property name="src.docs"     value="${src.dir}/documentation"/>
+		<property name="docs.dir"     value="${src.dir}/documentation/xdocs"/>
+		<property name="stylesheets.dir"  value="${src.dir}/documentation/stylesheets"/>
+		
+		<property name="build.dir"      value="./build"/>
+		<property name="build.docs"     value="${build.dir}/docs"/>
+		<property name="build.xdocs"    value="${build.dir}/xdocs"/>
+		
 		<filter token="Name"    value="${Name}"/>
 		<filter token="name"    value="${name}"/>
 		<filter token="version" value="${build.version}"/>
@@ -41,7 +50,7 @@
 	<!-- =================================================================== -->
 	<!-- Creates the jar file                                                -->
 	<!-- =================================================================== -->
-	<target name="jar" description="Empty Standard Target.">
+	<target name="jar" depends="docs" description="Empty Standard Target.">
 		
 		<echo message="Nothing to do."/>
 		
@@ -65,6 +74,36 @@
 	</target>
 		
 	<!-- =================================================================== -->
+	<!-- Prepares the docs                                                   -->
+	<!-- =================================================================== -->
+	<target name="prepare-docs">
+		
+		<mkdir dir="${build.xdocs}" />
+		<mkdir dir="${build.docs}" />
+
+		<!-- make filtered copy of XML docs -->
+		<copy todir="${build.xdocs}" filtering="on">
+			<fileset dir="${docs.dir}"/>
+		</copy>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- The documentation system                                            -->
+	<!-- =================================================================== -->
+	<target name="docs"
+          depends="init, prepare-docs"
+          description="Builds the documentation">
+
+		<xslt basedir="${build.xdocs}" destdir="${build.docs}"
+             extension=".html" style="${stylesheets.dir}/site.xsl">
+			<param name="header" expression="header.html"/>
+			<param name="index-file" expression="sidebar.xml"/>
+		</xslt>
+		
+	</target>
+
+	<!-- =================================================================== -->
 	<!-- Prepares the source distribution                                    -->
 	<!-- =================================================================== -->
 	<target name="dist-src" depends="init" if="dist.src.dir"
@@ -72,10 +111,14 @@
 
 		<property name="to.dir" value="${dist.src.dir}/${name}"/>
 		
+		<copy todir="${to.dir}/src" filtering="off">
+			<fileset dir="${src.dir}"/>
+		</copy>
+
 		<copy todir="${to.dir}" filtering="on">
 			<fileset dir=".">
 				<include name="*.xml"/>
-				<exclude name="build.xm."/>
+				<exclude name="build.xml"/>
 			</fileset>
 		</copy>
 
@@ -90,10 +133,14 @@
 	<!-- =================================================================== -->
 	<!-- Prepares the binary distribution                                    -->
 	<!-- =================================================================== -->
-	<target name="dist-bin"
-				  description="Empty Standard Target.">
+	<target name="dist-bin" depends="jar" if="dist.bin.dir"
+				  description="Prepares the binary distribution.">
 	
-		<echo message="Nothing to do."/>
+		<copy todir="${dist.bin.dir}/docs/dido">
+			<fileset dir="${build.docs}">
+				<exclude name="*.dia"/>
+			</fileset>
+		</copy>
 
 	</target>
 	
@@ -102,8 +149,7 @@
 	<!-- =================================================================== -->
 	<target name="clean" depends="init" description="Empty Standard Target.">
 		
-		<echo message="Nothing to do."/>
-		
+		<delete dir="${build.dir}"/>
 	</target>
 
 </project>

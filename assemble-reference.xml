@@ -26,34 +26,55 @@
 		</path>
 		
 		<path id="sourcepath">
-			<pathelement location="${global.projDir}/didio/build/src"/>
+			<pathelement location="${global.projDir}/dido/build/src"/>
             <pathelement location="${global.projDir}/oj-poi/build/src/"/>
 		</path>
 		
+        <path id="descriptorpath">
+            <pathelement location="${global.projDir}/dido/build/classes"/>
+            <pathelement location="${global.projDir}/oj-poi/build/classes/"/>
+        </path>
+        
 		<path id="docletpath">
 			<pathelement location="${global.projDir}/oddjob/build/tools"/>
 			<path refid="classpath"/>
             <pathelement location="${global.projDir}/oddjob/build/test"/>
-			<pathelement location="${global.projDir}/oj-ant/build/test/"/>
-			<pathelement location="${global.projDir}/oj-hsql/build/test/"/>
-			<pathelement location="${global.projDir}/oj-mail/build/test/"/>
-			<pathelement location="${global.projDir}/oj-net/build/test/"/>
-			<pathelement location="${global.projDir}/oj-struts/build/test/"/>
-            <pathelement location="${global.projDir}/oj-spring/build/test/"/>
+            <pathelement location="${global.projDir}/dido/build/test/"/>
 			<pathelement location="${global.projDir}/oj-poi/build/test/"/>
 		</path>
 		
-		<mkdir dir="${allants.dist.bin.dir}/docs/reference" />
+		<mkdir dir="${allants.dist.bin.dir}/docs/dido/reference" />
 
 		<javadoc packagenames="org.oddjob.*"
              sourcepathref="sourcepath"
-			 destdir="${allants.dist.bin.dir}/docs/reference"
+			 destdir="${allants.dist.bin.dir}/docs/dido/reference"
 			 docletpathref="docletpath"
 			 classpathref="classpath"
 			 doclet="org.oddjob.doclet.ManualDoclet"
 			 access="private">
+             <arg value="-dp"/>
+             <arg pathref="descriptorpath"/>
+             <arg value="-t"/>
+             <arg value="Dido Oddjob Reference"/>
 		</javadoc>
 		
+        <mkdir dir="${allants.dist.bin.dir}/docs/dido/dido-reference" />
+        
+        <javadoc packagenames="org.oddjob.*"
+             sourcepathref="sourcepath"
+             destdir="${allants.dist.bin.dir}/docs/dido/dido-reference"
+             docletpathref="docletpath"
+             classpathref="classpath"
+             doclet="org.oddjob.doclet.ManualDoclet"
+             access="private">
+             <arg value="-dp"/>
+             <arg pathref="descriptorpath"/>
+             <arg value="-dr"/>
+             <arg value="META-INF/dido-arooa.xml"/>
+             <arg value="-t"/>
+             <arg value="Dido Component Reference"/>
+        </javadoc>
+        
  				</tasks>
  			</xml>
  		</tasks>

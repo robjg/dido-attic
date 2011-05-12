@@ -9,8 +9,8 @@
                         <value key="allants.dist.target" value="${global.workDir}/dido-dist"/>
                         <value key="allants.build.version" value="${global.didoVersion}"/>
                         <value key="allants.dist.name" value="dido-${allants.build.version}"/>
-                        <value key="allants.dist.src.dir" value="${allants.dist.dir}/source/${allants.dist.name}"/>
-                        <value key="allants.dist.bin.dir" value="${allants.dist.dir}/bin/${allants.dist.name}"/>
+                        <value key="allants.dist.src.dir" value="${allants.dist.dir}/source/dido-src"/>
+                        <value key="allants.dist.bin.dir" value="${allants.dist.dir}/bin/oddjob"/>
                         <value key="default.build.target" value="all-tests"/>
                     </values>
                 </properties>
@@ -71,13 +71,9 @@
                         </properties>
                     </properties>
                 </oddjob>
+                <oddjob file="${this.dir}/assemble-reference.xml" id="build-reference" name="Build Reference"/>
                 <oddjob file="${this.dir}/assemble-javadoc.xml" id="build-javadoc" name="Build Javadoc"/>
                 <oddjob file="${this.dir}/assemble-archives.xml" id="assemble-archives" name="Assemble Archives"/>
-                <folder name="To Do">
-                    <jobs>
-                        <oddjob file="${this.dir}/assemble-reference.xml" id="build-reference" name="Build Reference"/>
-                    </jobs>
-                </folder>
             </jobs>
         </sequential>
     </job>

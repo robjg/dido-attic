@@ -3,11 +3,11 @@
     <job>
         <sequential name="${thisant.target} Ants">
             <jobs>
-                <class class="org.oddjob.util.ClassLoaderDiagnostics" className="com.sun.tools.javac.Main" id="find-tools" name="Find tools.jar in Class Path">
+                <bean class="org.oddjob.util.ClassLoaderDiagnostics" className="com.sun.tools.javac.Main" id="find-tools" name="Find tools.jar in Class Path">
                     <classLoader>
                         <value value="${dido-ant.classLoader}"/>
                     </classLoader>
-                </class>
+                </bean>
                 <check name="Check tools.jar is on Class Path" value="${find-tools.location}"/>
                 <variables id="vars">
                     <antClassLoader>
