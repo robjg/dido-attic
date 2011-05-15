@@ -20,14 +20,14 @@
             <fileset dir="${allants.dist.bin.dir}/opt/lib">
                 <include name="*.jar"/>
             </fileset>
-            <fileset dir="${allants.dist.bin.dir}/oddballs/oj-poi/lib">
+            <fileset dir="${allants.dist.bin.dir}/oddballs/dido-poi/lib">
                 <include name="*.jar"/>
             </fileset>
 		</path>
 		
 		<path id="sourcepath">
 			<pathelement location="${global.projDir}/dido/build/src"/>
-            <pathelement location="${global.projDir}/oj-poi/build/src/"/>
+            <pathelement location="${global.projDir}/dido-poi/build/src/"/>
 		</path>
 		
 		<mkdir dir="${allants.dist.bin.dir}/docs/dido/api" />

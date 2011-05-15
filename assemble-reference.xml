@@ -20,19 +20,19 @@
             <fileset dir="${allants.dist.bin.dir}/opt/lib">
                 <include name="*.jar"/>
             </fileset>
-            <fileset dir="${allants.dist.bin.dir}/oddballs/oj-poi/lib">
+            <fileset dir="${allants.dist.bin.dir}/oddballs/dido-poi/lib">
                 <include name="*.jar"/>
             </fileset>
 		</path>
 		
 		<path id="sourcepath">
 			<pathelement location="${global.projDir}/dido/build/src"/>
-            <pathelement location="${global.projDir}/oj-poi/build/src/"/>
+            <pathelement location="${global.projDir}/dido-poi/build/src/"/>
 		</path>
 		
         <path id="descriptorpath">
             <pathelement location="${global.projDir}/dido/build/classes"/>
-            <pathelement location="${global.projDir}/oj-poi/build/classes/"/>
+            <pathelement location="${global.projDir}/dido-poi/build/classes/"/>
         </path>
         
 		<path id="docletpath">
@@ -40,7 +40,7 @@
 			<path refid="classpath"/>
             <pathelement location="${global.projDir}/oddjob/build/test"/>
             <pathelement location="${global.projDir}/dido/build/test/"/>
-			<pathelement location="${global.projDir}/oj-poi/build/test/"/>
+			<pathelement location="${global.projDir}/dido-poi/build/test/"/>
 		</path>
 		
 		<mkdir dir="${allants.dist.bin.dir}/docs/dido/reference" />

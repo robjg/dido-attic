@@ -42,11 +42,11 @@
                         <value value="${vars.antClassLoader}"/>
                     </classLoader>
                 </ant>
-                <ant id="oj-poi-ant" name="OJ Poi Ant">
+                <ant id="dido-poi-ant" name="OJ Poi Ant">
                     <tasks>
                         <xml>
                             <tasks>
-                                <ant antfile="${global.projDir}/oj-poi/build.xml" inheritAll="false" target="${thisant.target}">
+                                <ant antfile="${global.projDir}/dido-poi/build.xml" inheritAll="false" target="${thisant.target}">
                                     <property name="dist.src.dir" value="${allants.dist.src.dir}"/>
                                     <property name="dist.bin.dir" value="${allants.dist.bin.dir}"/>
                                     <property name="build.version" value="${allants.build.version}"/>
