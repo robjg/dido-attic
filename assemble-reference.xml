@@ -36,7 +36,7 @@
         </path>
         
 		<path id="docletpath">
-			<pathelement location="${global.projDir}/oddjob/build/tools"/>
+			<pathelement location="${global.projDir}/oddjob/build/tools/classes"/>
 			<path refid="classpath"/>
             <pathelement location="${global.projDir}/oddjob/build/test"/>
             <pathelement location="${global.projDir}/dido/build/test/"/>
