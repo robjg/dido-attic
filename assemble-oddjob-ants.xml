@@ -42,7 +42,7 @@
                         <value value="${vars.antClassLoader}"/>
                     </classLoader>
                 </ant>
-                <ant id="dido-poi-ant" name="OJ Poi Ant">
+                <ant id="dido-poi-ant" name="Dido Poi Ant">
                     <tasks>
                         <xml>
                             <tasks>
