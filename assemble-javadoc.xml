@@ -30,6 +30,13 @@
             <pathelement location="${global.projDir}/dido-poi/build/src/"/>
 		</path>
 		
+        <path id="tagletpath">
+            <pathelement location="${global.projDir}/oddjob/build/tools/classes"/>
+            <path refid="classpath"/>
+            <pathelement location="${global.projDir}/dido/build/test"/>
+            <pathelement location="${global.projDir}/dido-poi/build/test"/>
+        </path>
+        
 		<mkdir dir="${allants.dist.bin.dir}/docs/dido/api" />
 
 		<javadoc packagenames="org.oddjob.*"
@@ -43,12 +50,19 @@
              doctitle="Dido ${global.didoVersion}">
 			<classpath refid="classpath"/>
 			<link href="http://java.sun.com/javase/6/docs/api/"/>
-			<tag name="oddjob.element" description="Oddjob Element: "/>
-			<tag name="oddjob.property" description="Oddjob Property: "/>
-			<tag name="oddjob.description" description="Description: "/>
-			<tag name="oddjob.example" description="Example: "/>
-			<tag name="oddjob.required" description="Required: "/>
-			<tag name="see"/>
+            <taglet name="org.oddjob.tools.taglet.PropertyTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+            <taglet name="org.oddjob.tools.taglet.DescriptionTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+            <taglet name="org.oddjob.tools.taglet.ExampleTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+            <taglet name="org.oddjob.tools.taglet.RequiredTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+		    <tag name="see"/>
 			<tag name="author"/>
 			<tag name="version"/>
 			<tag name="since"/>
