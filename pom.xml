@@ -15,12 +15,6 @@
 
         <dependency>
             <groupId>uk.co.rgordon</groupId>
-            <artifactId>dido-how</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>uk.co.rgordon</groupId>
             <artifactId>arooa</artifactId>
             <scope>provided</scope>
         </dependency>
