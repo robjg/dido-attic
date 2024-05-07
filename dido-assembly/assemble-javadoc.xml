@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+ <job>
+ 	<ant id="build-reference">
+ 		<tasks>
+ 			<xml>
+ 				<tasks>
+ 				
+		<path id="classpath">
+            <fileset dir="${global.projDir}/arooa/lib">
+                <include name="*.jar"/>
+            </fileset>
+			<fileset file="${global.projDir}/oddjob/run-oddjob.jar"/>
+			<fileset dir="${global.projDir}/oddjob/lib">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${global.projDir}/oddjob/opt/lib">
+				<include name="*.jar"/>
+			</fileset>
+            <fileset dir="${allants.dist.bin.dir}/opt/lib">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${allants.dist.bin.dir}/oddballs/dido-poi/lib">
+                <include name="*.jar"/>
+            </fileset>
+		</path>
+		
+		<path id="sourcepath">
+			<pathelement location="${global.projDir}/dido/build/src"/>
+            <pathelement location="${global.projDir}/dido-poi/build/src/"/>
+		</path>
+		
+        <path id="tagletpath">
+            <pathelement location="${global.projDir}/oddjob/build/tools/classes"/>
+            <path refid="classpath"/>
+            <pathelement location="${global.projDir}/dido/build/test"/>
+            <pathelement location="${global.projDir}/dido-poi/build/test"/>
+        </path>
+        
+		<mkdir dir="${allants.dist.bin.dir}/docs/dido/api" />
+
+		<javadoc packagenames="org.oddjob.*"
+             sourcepathref="sourcepath"
+			 destdir="${allants.dist.bin.dir}/docs/dido/api"
+             author="true"
+             version="true"
+             use="false"
+             noindex="true"
+             windowtitle="Dido ${global.didoVersion} API"
+             doctitle="Dido ${global.didoVersion}">
+			<classpath refid="classpath"/>
+			<link href="http://java.sun.com/javase/6/docs/api/"/>
+            <taglet name="org.oddjob.tools.taglet.PropertyTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+            <taglet name="org.oddjob.tools.taglet.DescriptionTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+            <taglet name="org.oddjob.tools.taglet.ExampleTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+            <taglet name="org.oddjob.tools.taglet.RequiredTaglet">
+                <path refid="tagletpath"/>
+            </taglet>
+		    <tag name="see"/>
+			<tag name="author"/>
+			<tag name="version"/>
+			<tag name="since"/>
+			<tag name="param"/>
+			<tag name="return"/>
+			<tag name="throws"/>
+		</javadoc>
+		
+ 				</tasks>
+ 			</xml>
+ 		</tasks>
+ 	</ant>
+ </job>
+</oddjob>

@@ -1,0 +1,177 @@
+<project basedir="." name="Oddball Assembly">
+
+	<!-- =================================================================== -->
+	<!-- Initialization target                                               -->
+	<!-- =================================================================== -->
+	<target name="init">
+
+		<tstamp/>
+
+		<!-- =================================================================== -->
+		<!-- Properties                                                          -->
+		<!-- =================================================================== -->
+
+		<property name="Name"     value="Dido Assembly"/>
+		<property name="name"     value="dido-assembly"/>
+		<property name="build.version"  value="0.0.0"/>
+
+		<property name="oddjob.src"          value="../oddjob"/>
+		
+		<echo message="--------------------------------------------------------------"/>
+		<echo message="            ${Name} ${build.version}                                "/>
+		<echo message="--------------------------------------------------------------"/>
+		<echo message="Building with ${ant.version}"/>
+		<echo message="using build file ${ant.file}"/>
+		<echo message="oddjob.src is ${oddjob.src}"/>
+		<echo message="--------------------------------------------------------------"/>
+
+		<property name="src.dir"      value="./src"/>			
+		<property name="src.docs"     value="${src.dir}/documentation"/>
+		<property name="docs.dir"     value="${src.dir}/documentation/xdocs"/>
+		<property name="stylesheets.dir"  value="${src.dir}/documentation/stylesheets"/>
+		
+		<property name="build.dir"      value="./build"/>
+		<property name="build.docs"     value="${build.dir}/docs"/>
+		<property name="build.xdocs"    value="${build.dir}/xdocs"/>
+		
+		<filter token="Name"    value="${Name}"/>
+		<filter token="name"    value="${name}"/>
+		<filter token="version" value="${build.version}"/>
+		<filter token="date"    value="${TODAY}"/>
+		<filter token="log"     value="true"/>
+		<filter token="verbose" value="true"/>
+		<filter token="reference" value="../reference"/>
+		<filter token="javadoc" value="../api"/>
+		<filter token="userguide" value="../userguide"/>
+		<filter token="devguide" value="../devguide"/>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Creates the jar file                                                -->
+	<!-- =================================================================== -->
+	<target name="jar" depends="docs" description="Empty Standard Target.">
+		
+		<echo message="Nothing to do."/>
+		
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Test targets                                                       -->
+	<!-- =================================================================== -->
+	
+
+	<target name="compile-tests" description="Empty Standard Target.">
+
+		<echo message="Nothing to do."/>
+		
+	</target>
+	
+	<target name="all-tests" description="Empty Standard Target.">
+
+		<echo message="Nothing to do."/>
+		
+	</target>
+		
+	<!-- =================================================================== -->
+	<!-- Prepares the docs                                                   -->
+	<!-- =================================================================== -->
+	<target name="prepare-docs">
+		
+		<mkdir dir="${build.xdocs}" />
+		<mkdir dir="${build.docs}" />
+
+		<!-- make filtered copy of XML docs -->
+		<copy todir="${build.xdocs}" filtering="on">
+			<fileset dir="${docs.dir}"/>
+		</copy>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- The documentation system                                            -->
+	<!-- =================================================================== -->
+	<target name="docs"
+          depends="init, prepare-docs"
+          description="Builds the documentation">
+
+		<copy todir="${build.docs}" filtering="off">
+			<fileset file="${stylesheets.dir}/oddjob.css"/>
+		</copy>
+		
+		<xslt basedir="${build.xdocs}" destdir="${build.docs}"
+             extension=".html" style="${stylesheets.dir}/site.xsl">
+			<param name="header" expression="header.html"/>
+			<param name="index-file" expression="sidebar.xml"/>
+		</xslt>
+		
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Prepares the source distribution                                    -->
+	<!-- =================================================================== -->
+	<target name="dist-src" depends="init" if="dist.src.dir"
+          description="Prepares the source distribution">
+
+		<property name="to.dir" value="${dist.src.dir}/${name}"/>
+		
+		<copy todir="${to.dir}/src" filtering="off">
+			<fileset dir="${src.dir}"/>
+		</copy>
+
+		<copy todir="${to.dir}" filtering="on">
+			<fileset dir=".">
+				<include name="*.xml"/>
+				<exclude name="build.xml"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${to.dir}">
+			<fileset dir=".">
+				<include name="build.xml"/>
+			</fileset>
+		</copy>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Prepares the binary distribution                                    -->
+	<!-- =================================================================== -->
+	<target name="dist-bin" depends="jar" if="dist.bin.dir"
+				  description="Prepares the binary distribution.">
+	
+		<copy todir="${dist.bin.dir}/docs/dido">
+			<fileset dir="${build.docs}">
+				<exclude name="*.dia"/>
+			</fileset>
+		</copy>
+
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Maven Targets			                                     -->
+	<!-- =================================================================== -->
+		
+	<target name="maven-install"
+			description="Not yet implemented">
+	</target>
+	
+    <target name="maven-deploy" 
+    	description="Not yet implemented">
+    </target>
+	
+	<target name="maven-stage" 
+		description="Not yet implemented">
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Clean targets                                                       -->
+	<!-- =================================================================== -->
+	<target name="clean" depends="init" description="Empty Standard Target.">
+		
+		<delete dir="${build.dir}"/>
+	</target>
+
+</project>
+
+<!-- End of file -->

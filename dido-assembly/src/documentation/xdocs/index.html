@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>Dido - Data In Data Out</title>
+	</head>
+	<body>
+	<h1>Dido - Data In Data Out</h1>
+	
+	<h3>Overview</h3>
+	
+	<p>Dido provides a utiity to map Java to and from external
+	data formats such as CSV and fixed with flat files, or Excel.</p>
+	
+	<p>Why yet another such framework when there are already so many?
+	Here are Dido's requirements.</p>
+	
+	<ul>
+		<li>The data specification must be two way. A
+		<a href="reference/org/oddjob/dido/DataPlanType">dido:plan</a>
+		created by the developer provider by the developer can
+		be given to the developers reading data downstream so they
+		can use it immediately in their applications. No more file 
+		specifications that drift out of date or are ambiguous. The plan
+		is the plan.
+		</li>
+		
+		<li>The plan must not contain Java bean mapping information. 
+		Again, this is to facilitate the exchange of plans.
+		One developers Apple type is
+		another developers Fruit type. Most other mapping frameworks mix Java 
+		mapping information and data layout information.</li>
+		
+	</ul>	
+	
+	<h3>Installing and Using Dido</h3>
+	
+	<p>Dido is an extension to the 
+	<a href="http://rgordon.co.uk/projects/oddjob">Oddjob</a> task execution
+	framework. To install Dido unzip the dido-n.n.n.zip file over your 
+	existing <code>oddjob</code>
+	directory. After instalation the Oddjob directories should have been 
+	modified to look something like this.
+	</p>
+	
+	<pre><code>
+oddjob
+  docs
+    dido
+      index.html
+        api
+          ...
+        reference
+          index.html
+          ...
+        dido-reference
+          index.html
+          ...
+  opt
+  	lib
+  	   dido-n.n.n.jar
+  oddballs
+    dido-poi
+       lib
+         dido-poi-n.n.n.jar
+         poi-x.x-yyyyyMMdd.jar   
+         other poi jars...
+	</code></pre>
+	
+	<p>
+	The dido-poi Oddball is an optional extension to Dido for reading
+	and writing Microsoft Excel files. The <code>dido-poi</code> directory
+	and it's contents may be deleted if reading and writing to Excel is
+	not required.
+	</p>
+	
+	<p>When you next start Oddjob, the Dido job definitions will be
+	available to use in your Oddjob configurations.
+	</p>
+	
+	</body>
+</html>
